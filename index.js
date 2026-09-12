@@ -18,6 +18,7 @@ import paymentRouter from "./controller/payment/route.js";
 import dashboardRouter from "./controller/dashboard/route.js";
 import reportRouter from "./controller/report/route.js";
 import buyerRouter from "./controller/buyer/route.js";
+import migrationRouter from "./controller/migration/route.js";
 
 // ENV Configuration
 dotenv.config();
@@ -30,8 +31,8 @@ app.use(cors({
   origin: process.env.CORS_ORIGIN === "*" ? true : (process.env.CORS_ORIGIN || "*"),
   credentials: true
 }));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 // Database Connection
 dbConnection().catch((err) => {
@@ -69,6 +70,7 @@ app.use("/api/payments", paymentRouter);
 app.use("/api/dashboard", dashboardRouter);
 app.use("/api/reports", reportRouter);
 app.use("/api/buyers", buyerRouter);
+app.use("/api/migration", migrationRouter);
 
 // 404 Route Catch
 app.use((req, res) => {

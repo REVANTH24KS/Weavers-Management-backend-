@@ -20,7 +20,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "seed": "node seed.js"
+    "seed": "node seed.js",
+    "import-data": "node import_supabase_data.js",
+    "verify-data": "node verify_imported_data.js"
   },
   "author": "",
   "license": "ISC",

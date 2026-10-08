@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const transactionSchema = new mongoose.Schema(
   {
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true, index: true },
     transactionId: { type: Number, unique: true, index: true },
     dispatchGroupId: { type: String, index: true, default: null },
     weaver: { type: mongoose.Schema.Types.ObjectId, ref: "Weaver", required: true, index: true },

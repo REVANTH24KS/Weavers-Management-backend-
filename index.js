@@ -34,10 +34,7 @@ app.use(cors({
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
-// Database Connection
-dbConnection().catch((err) => {
-  console.error("Initial DB connection failed:", err.message);
-});
+// Database Connection handled during server startup
 
 // Health Checks
 app.get("/health-check", (req, res) => {
@@ -88,8 +85,18 @@ app.use(errorHandler);
 
 // Start Server if not imported by serverless function
 if (process.env.NODE_ENV !== "test") {
-  app.listen(PORT, () => {
-    console.log(`🚀 Weaver Ledger Service listening on port ${PORT}`);
+  dbConnection()
+    .then(() => {
+      app.listen(PORT, () => {
+        console.log(`🚀 Weaver Ledger Service listening on port ${PORT}`);
+      });
+    })
+    .catch((err) => {
+      console.error("Initial DB connection failed:", err.message);
+    });
+} else {
+  dbConnection().catch((err) => {
+    console.error("Initial DB connection failed:", err.message);
   });
 }
 

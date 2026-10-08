@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const materialRateSchema = new mongoose.Schema(
   {
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true, index: true },
     rateId: { type: Number, unique: true, index: true },
     materialType: { type: String, enum: ["jari", "yarn", "color_yarn", "babin"], required: true },
     ratePerUnit: { type: Number, required: true, min: 0.01 },

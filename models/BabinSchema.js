@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const babinSchema = new mongoose.Schema(
   {
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true, index: true },
     babinId: { type: Number, unique: true, index: true },
     babinNumber: { type: String, required: true, trim: true },
     weaver: { type: mongoose.Schema.Types.ObjectId, ref: "Weaver", required: true, index: true },

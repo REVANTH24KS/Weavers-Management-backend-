@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const buyerSchema = new mongoose.Schema(
   {
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true, index: true },
     buyerId: { type: Number, unique: true, index: true },
     buyerName: { type: String, required: true, trim: true },
     contactPerson: { type: String, default: null, trim: true },

@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const loomSchema = new mongoose.Schema(
   {
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true, index: true },
     loomId: { type: Number, unique: true, index: true },
     loomNumber: { type: String, required: true, trim: true },
     weaver: { type: mongoose.Schema.Types.ObjectId, ref: "Weaver", required: true, index: true },
